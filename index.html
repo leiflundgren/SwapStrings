@@ -3,13 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>TypeScript HTML App</title>
+    <title>Swap strings</title>
     <link rel="stylesheet" href="app.css" type="text/css" />
     <script src="app.js"></script>
 </head>
 <body>
     <h1>TypeScript HTML App</h1>
 
-    <div id="content"></div>
+    <div id="content">
+        <p>String A <input id="a" width="100" value="hej" /></p>
+        <p>String B <input id="b" width="100" value="hopp" /></p>
+        <p>
+            Input text:<br />
+            <textarea id="input" cols="60" rows="10">plipp hejsan hoppsan plopp</textarea>
+        </p>
+        <br/>
+        <p>
+            Output text:<br />
+            <textarea id="output" cols="60" rows="10">not yet initialzed</textarea>>
+        </p>
+        <p><button id="btnUpdate" value="buitton text" /> Update </p>
+
+    </div>
 </body>
 </html>

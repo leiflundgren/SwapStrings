@@ -23,25 +23,36 @@ function SwapStrings(str, a, b) {
     }
     return res;
 }
-var Swapper = /** @class */ (function () {
-    function Swapper(element) {
-        this.element = element;
-        this.element.innerHTML += "Swap hej/hopp in hejsan hoppsan: ";
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = SwapStrings("hejsan hoppsan toppsan", "hej", "hopp");
+function Swapper(a_elem, b_elem, input_elem, output_elem) {
+    var input = input_elem.textContent;
+    var a = a_elem.value;
+    var b = b_elem.value;
+    if (input == null || input.length == 0) {
+        output_elem.innerText = "";
+        return;
     }
-    Swapper.prototype.start = function () {
-        // this.timerToken = setInterval(() => this.span.innerHTML = new Date().toUTCString(), 500);
-    };
-    Swapper.prototype.stop = function () {
-        clearTimeout(this.timerToken);
-    };
-    return Swapper;
-}());
+    if (a == null || a.length == 0 || b == null || b.length == 0) {
+        return;
+    }
+    var res = SwapStrings(input, a, b);
+    output_elem.value = res;
+}
+function Update() {
+    var a = document.getElementById('a');
+    var b = document.getElementById('b');
+    var input = document.getElementById('input');
+    var output = document.getElementById('output');
+    Swapper(a, b, input, output);
+}
 window.onload = function () {
-    var el = document.getElementById('content');
-    var pgm = new Swapper(el);
-    pgm.start();
+    var btn = document.getElementById('btnUpdate');
+    btn.onclick = Update;
+    Update();
+    var a = document.getElementById('a');
+    a.onchange = Update;
+    var b = document.getElementById('b');
+    b.onchange = Update;
+    var input = document.getElementById('input');
+    input.onchange = Update;
 };
 //# sourceMappingURL=app.js.map

@@ -30,31 +30,47 @@
 }
 
 
-class Swapper {
-    element: HTMLElement;
-    span: HTMLElement;
-    timerToken: number;
+function Swapper(
+    a_elem: HTMLInputElement,
+    b_elem: HTMLInputElement,
+    input_elem: HTMLTextAreaElement,
+    output_elem: HTMLTextAreaElement,
+) {
 
-    constructor(element: HTMLElement) {
-        this.element = element;
-        this.element.innerHTML += "Swap hej/hopp in hejsan hoppsan: ";
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = SwapStrings("hejsan hoppsan toppsan", "hej", "hopp");
+    var input: string = input_elem.textContent;
+    var a: string = a_elem.value;
+    var b: string = b_elem.value;
+
+    if (input == null || input.length == 0) {
+        output_elem.innerText = "";
+        return;
     }
-
-    start() {
-        // this.timerToken = setInterval(() => this.span.innerHTML = new Date().toUTCString(), 500);
+    if (a == null || a.length == 0 || b == null || b.length == 0) {
+        return;
     }
+    var res: string = SwapStrings(input, a, b);
+    output_elem.value = res
+}
 
-    stop() {
-        clearTimeout(this.timerToken);
-    }
-
+function Update() {
+    var a = <HTMLInputElement> document.getElementById('a');
+    var b = <HTMLInputElement> document.getElementById('b');
+    var input = <HTMLTextAreaElement> document.getElementById('input');
+    var output = <HTMLTextAreaElement> document.getElementById('output')
+    Swapper(a, b, input, output);
 }
 
 window.onload = () => {
-    var el = document.getElementById('content');
-    var pgm = new Swapper(el);
-    pgm.start();
+
+
+    var btn = <HTMLButtonElement>document.getElementById('btnUpdate');
+    btn.onclick = Update;
+    Update();    
+
+    var a = <HTMLInputElement>document.getElementById('a');
+    a.onchange = Update;
+    var b = <HTMLInputElement>document.getElementById('b');
+    b.onchange = Update;
+    var input = <HTMLTextAreaElement>document.getElementById('input');
+    input.onchange = Update;
 };
